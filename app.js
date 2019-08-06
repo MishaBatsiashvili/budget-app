@@ -226,7 +226,7 @@ var UIController = (function(){
                 <div class="right clearfix">
                     <div class="item__value">%value%</div>
                     <div class="item__delete">
-                        <button class="item__delete--btn"><i class="far fa-times-circle"></i></button>
+                        <button class="item__delete--btn"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             </div>`;
@@ -238,7 +238,7 @@ var UIController = (function(){
                     <div class="item__value">%value%</div>
                     <div class="item__percentage">21%</div>
                     <div class="item__delete">
-                        <button class="item__delete--btn"><i class="far fa-times-circle"></i></button>
+                        <button class="item__delete--btn"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             </div>`;
@@ -292,7 +292,7 @@ var UIController = (function(){
         if(obj.percentage > 0){
             document.querySelector(DOMstrings.precentageLabel).textContent = obj.percentage + '%';
         } else {
-            document.querySelector(DOMstrings.precentageLabel).textContent = '% too small';
+            document.querySelector(DOMstrings.precentageLabel).textContent = '---';
         }
     }
 
@@ -306,7 +306,7 @@ var UIController = (function(){
             if(percentagesArr[index] > 0)
                 current.textContent = percentagesArr[index] + '%';
             else
-                current.textContent = '% too small';
+                current.textContent = '---';
         });
 
 
