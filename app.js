@@ -9,10 +9,13 @@ var budgetController = (function(){
     };
 
     _Expense.prototype.calculatePercentage = function(totalIncome){
-        if(totalIncome > 0)
-            this.percentage = Math.round(this.value/totalIncome*100);
-        else
+        if(totalIncome > 0){
+            // this.percentage = Math.round(this.value/totalIncome*100);
+            this.percentage = parseFloat((this.value/totalIncome*100).toFixed(3));
+        }
+        else{
             this.percentage = -1
+        }
     }
 
     _Expense.prototype.getPercentage = function(){
@@ -98,7 +101,7 @@ var budgetController = (function(){
 
         // calculate the percentage of income that we've spent
         if(data.totals.inc > 0){
-            data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+            data.percentage = parseFloat( ((data.totals.exp / data.totals.inc) * 100).toFixed(3) );
         } else {
             data.percentage = -1;
         }
@@ -279,6 +282,8 @@ var UIController = (function(){
     
 
     var displayBudget = function(obj){
+        console.log("obj", obj);
+
         var type = obj.budget >= 0 ? type = 'inc' : type = 'exp';
 
         document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
@@ -287,7 +292,7 @@ var UIController = (function(){
         if(obj.percentage > 0){
             document.querySelector(DOMstrings.precentageLabel).textContent = obj.percentage + '%';
         } else {
-            document.querySelector(DOMstrings.precentageLabel).textContent = '---';
+            document.querySelector(DOMstrings.precentageLabel).textContent = '% too small';
         }
     }
 
@@ -301,7 +306,7 @@ var UIController = (function(){
             if(percentagesArr[index] > 0)
                 current.textContent = percentagesArr[index] + '%';
             else
-                current.textContent = '---';
+                current.textContent = '% too small';
         });
 
 
