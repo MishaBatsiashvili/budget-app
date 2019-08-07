@@ -226,7 +226,7 @@ var UIController = (function(){
                 <div class="right clearfix">
                     <div class="item__value">%value%</div>
                     <div class="item__delete">
-                        <button class="item__delete--btn"><i class="fas fa-trash-alt"></i></button>
+                        <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                     </div>
                 </div>
             </div>`;
@@ -238,7 +238,7 @@ var UIController = (function(){
                     <div class="item__value">%value%</div>
                     <div class="item__percentage">21%</div>
                     <div class="item__delete">
-                        <button class="item__delete--btn"><i class="fas fa-trash-alt"></i></button>
+                        <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                     </div>
                 </div>
             </div>`;
@@ -281,18 +281,19 @@ var UIController = (function(){
     }
     
 
-    var displayBudget = function(obj){
+    const displayBudget = function(obj){
         console.log("obj", obj);
 
-        var type = obj.budget >= 0 ? type = 'inc' : type = 'exp';
+        const type = obj.budget >= 0 ? 'inc' : 'exp';
+        const budget = (obj.budget > 0) ? obj.budget : 0;
 
-        document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
+        document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(budget, type);
         document.querySelector(DOMstrings.totalIncomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
         document.querySelector(DOMstrings.totalExpensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
         if(obj.percentage > 0){
             document.querySelector(DOMstrings.precentageLabel).textContent = obj.percentage + '%';
         } else {
-            document.querySelector(DOMstrings.precentageLabel).textContent = '---';
+            document.querySelector(DOMstrings.precentageLabel).textContent = '% too small';
         }
     }
 
@@ -306,7 +307,7 @@ var UIController = (function(){
             if(percentagesArr[index] > 0)
                 current.textContent = percentagesArr[index] + '%';
             else
-                current.textContent = '---';
+                current.textContent = '% too small';
         });
 
 
@@ -317,9 +318,11 @@ var UIController = (function(){
          // + or - before the number
         // exactly two decimal points
         // comma separating thousands
-        
+        const cur = '$'
+        if(num <= 0)
+            return num + cur;
 
-        var numSplit, int, dec, sign;
+        let numSplit, int, dec, sign;
 
         num = num.toFixed(2);
         numSplit = num.split('.');
@@ -351,7 +354,7 @@ var UIController = (function(){
             sign = '+';
         }
 
-        return sign + int + '.' + dec;
+        return sign + int + '.' + dec + cur;
     }
 
 
