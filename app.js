@@ -38,7 +38,7 @@ let budgetController = (function(){
         data.totals[type] = sum;
     }
 
-    let data = {
+    const data = {
         allItems: {
             exp: [],
             inc: []
