@@ -30,12 +30,17 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(255, 1, 1, 0.3) !important;
 }
 
+.text-lightgray{
+    color: rgb(80, 78, 78);
+}
+
 /**********************************************
 *** TOP PART
 **********************************************/
 
 .top {
-    height: 40vh;
+    /* height: 40vh; */
+    padding: 100px 0;
     background-image: url("http://sfwallpaper.com/images/background-image-for-website-1.jpg"); 
     background-size: cover;
     background-position: center;
